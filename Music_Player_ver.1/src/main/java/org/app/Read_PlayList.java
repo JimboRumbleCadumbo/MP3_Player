@@ -4,9 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Read_PlayList {
+    public ArrayList<File> myPlaylist = new ArrayList<>();
 
     public ArrayList<File> readMusic(){
-        ArrayList<File> myPlaylist = new ArrayList<>();
+//        ArrayList<File> myPlaylist = new ArrayList<>();
         String directoryPath = "MP3_Player/Music_Player_ver.1/src/audio";
 
         File directory = new File(directoryPath);
@@ -23,7 +24,8 @@ public class Read_PlayList {
         } else {
             System.out.println("Directory does not exist！");
         }
-
         return myPlaylist;
     }
+
+    public
 }

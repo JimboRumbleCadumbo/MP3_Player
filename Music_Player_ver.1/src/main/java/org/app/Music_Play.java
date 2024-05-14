@@ -2,31 +2,33 @@ package org.app;
 
 import javax.sound.sampled.*;
 import java.io.File;
+import java.util.ArrayList;
 
 public class Music_Play {
 
-    public static Music_Play usrMusicPlay = new Music_Play("src/audio/usrmusic.wav",true);
     Clip clip;
+    int songNum=0;
 
     /**
      * A function that starts playing the music
-     * @param fileName the path of the songs
-     * @param loop
      */
-
-    public Music_Play(String fileName, boolean loop) {
-//        String audioFilePath = Music_Play.class.getResource(name).getPath();
-        File audioFile = new File(fileName);
-
+    public Music_Play() {
+//        String audioFilePath = String.valueOf(Music_Play.class.getResource(filePath));
+//        System.out.println(audioFilePath);
+//        File audioFile = new File(filePath);
+        Read_PlayList newList = new Read_PlayList();
+        newList.myPlaylist = newList.readMusic();
+        File songFile = newList.myPlaylist.get(0);
+        System.out.println(songFile.exists());
         try {
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(songFile);
+
+            System.out.println(audioStream);
+
             clip = AudioSystem.getClip();
             clip.open(audioStream);
         }catch (Exception e) {
             System.out.println("error");
-        }
-        if(loop) {
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
 
@@ -36,6 +38,16 @@ public class Music_Play {
 
     public void stop_play() {
         clip.stop();
+    }
+
+    public void set_prev_song() {
+//        if(songNum == 0){
+//            songNum =
+//        }
+    }
+
+    public void set_next_song() {
+
     }
 
 }
