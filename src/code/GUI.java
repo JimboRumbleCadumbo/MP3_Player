@@ -6,7 +6,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class GUI{
-    //    JTextField usrText;
+
+    public Music_Play player = new Music_Play();
+
     public GUI() {
         // Initialize Playlist
         Read_PlayList reader = new Read_PlayList();
@@ -40,15 +42,21 @@ public class GUI{
         panel.add(nextBtn);
 
         // Button action
-//        playBtn.addActionListener(actionEvent -> {
-//            new Music_Play.start_play();
-//        });
-//
-//        stopBtn.addActionListener(actionEvent -> {
-//            new Music_Play.stop_play();
-//        });
+        playBtn.addActionListener(actionEvent -> {
+            player.start_play();
+        });
 
+        stopBtn.addActionListener(actionEvent -> {
+            player.stop_play();
+        });
 
+        prevBtn.addActionListener(actionEvent -> {
+
+        });
+
+        nextBtn.addActionListener(actionEvent -> {
+
+        });
 
         frame.setVisible(true);
     }

@@ -7,9 +7,8 @@ public class Read_PlayList {
     public ArrayList<File> myPlaylist = new ArrayList<>();
 
     public ArrayList<File> readMusic(){
-//        ArrayList<File> myPlaylist = new ArrayList<>();
-        String directoryPath = "code/audio";
-
+        //Setup song file path
+        String directoryPath = "src/audio";
         File directory = new File(directoryPath);
 
         if (directory.exists() && directory.isDirectory()) {
@@ -24,6 +23,10 @@ public class Read_PlayList {
         } else {
             System.out.println("Directory does not exist！");
         }
+        return myPlaylist;
+    }
+
+    ArrayList<File> getMyPlaylist(){
         return myPlaylist;
     }
 }
