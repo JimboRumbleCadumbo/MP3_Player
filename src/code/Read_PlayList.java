@@ -37,7 +37,7 @@ public class Read_PlayList {
         } else {
             System.out.println("Directory does not exist!");
         }
-        if (myPlaylist.size() == 0) {
+        if (myPlaylist.isEmpty()) {
             MessagePopup.showError("The list is empty!");
         }
         return myPlaylist;
