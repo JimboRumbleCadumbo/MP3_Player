@@ -3,6 +3,10 @@ package code;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * PlayList class for handling music order
+ */
+
 public class PlayList {
     ArrayList<Music> SongList;
     int index = 0;
@@ -28,9 +32,13 @@ public class PlayList {
             }
             return SongList.get(index);
         }
-
     }
 
+    /**
+     * Plays a random song in the list
+     *
+     * @return the selected random song
+     */
     public Music Ran_song() {
         Random r = new Random();
         int nextI = 0;
@@ -42,16 +50,20 @@ public class PlayList {
         return SongList.get(index);
     }
 
+    /**
+     * Get the song names from list
+     *
+     * @return The strings of the songs
+     */
     public String get_list_str() {
-        String list = "<html>";
+        StringBuilder list = new StringBuilder("<html>");
         for (int i = 0; i < SongList.size(); i++) {
             if (i == index) {
-                list += "<html><font size='6'>" + SongList.get(i).name + "</font><br>";
+                list.append("<html><font size='6'>").append(SongList.get(i).name).append("</font><br>");
             } else {
-                list += SongList.get(i).name + "<br>";
+                list.append(SongList.get(i).name).append("<br>");
             }
-
         }
-        return list;
+        return list.toString();
     }
 }

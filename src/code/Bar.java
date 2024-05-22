@@ -5,9 +5,13 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import javax.imageio.ImageIO;
+
+/**
+ * displays the progress bar of the song
+ */
 
 public class Bar {
     JPanel body_panel = new JPanel();
@@ -17,13 +21,19 @@ public class Bar {
     double current;
     double max;
 
+    /**
+     * Bar class constructor, adds the bar to the application UI
+     *
+     * @param size setting up the bar panel size
+     */
+
     public Bar(int size) {
         body_panel.setBounds(50, 50, size, size);
         outline.setBounds(0, 0, size, 15);
         bar.setBounds(0, 0, size, 15);
         BufferedImage bufimg = null;
         try {
-            bufimg = ImageIO.read(getClass().getResource("bar.png"));
+            bufimg = ImageIO.read(Objects.requireNonNull(getClass().getResource("bar.png")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,7 +41,7 @@ public class Bar {
                 Image.SCALE_SMOOTH);
         bar.setIcon(new ImageIcon(dimg));
         try {
-            bufimg = ImageIO.read(getClass().getResource("baroutline.png"));
+            bufimg = ImageIO.read(Objects.requireNonNull(getClass().getResource("barOutline.png")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,8 +52,6 @@ public class Bar {
         body_panel.setOpaque(false);
         body_panel.add(bar);
         body_panel.add(outline);
-
-
     }
 
     public void setCurr(double value) {

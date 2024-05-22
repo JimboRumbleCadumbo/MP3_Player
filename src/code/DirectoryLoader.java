@@ -4,6 +4,10 @@ import java.io.File;
 
 import javax.swing.*;
 
+/**
+ * Add a Directory Loader button onto the application
+ */
+
 public class DirectoryLoader extends JButton {
 
     DirectoryLoader(GUI gui) {
@@ -24,6 +28,4 @@ public class DirectoryLoader extends JButton {
             }
         });
     }
-
-
 }

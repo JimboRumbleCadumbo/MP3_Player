@@ -2,6 +2,10 @@ package code;
 
 import javax.swing.*;
 
+/**
+ * Shows warning messages in certain scenarios.
+ */
+
 public class MessagePopup {
 
     public static void showMessage(String message) {
