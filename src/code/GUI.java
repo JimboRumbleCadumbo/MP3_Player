@@ -4,20 +4,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
-
+import javax.sound.sampled.*;
+import java.io.IOException;
 public class GUI{
 
     public Music playing;
     PlayList play_list;
+    Read_PlayList reader = new Read_PlayList();
     ProgressBar pBar = new ProgressBar();
+    DraggablePanel songList;
+    JFrame frame;
     public GUI() {
         // Initialize Playlist
-        Read_PlayList reader = new Read_PlayList();
+        
         ArrayList<Music> usrPlaylist = reader.readMusic();
         play_list = new PlayList(usrPlaylist);
         playing = play_list.Previous_song();
         // Initialize GUI interface
-        JFrame frame = new JFrame();
+        frame = new JFrame();
         JPanel panel = new JPanel();
         frame.setSize(1000, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,8 +29,13 @@ public class GUI{
 
         frame.add(panel, BorderLayout.CENTER);
 //        panel.setBounds(0,0,1000,700);
-        panel.setLayout(null);        
-        JLabel songList = new JLabel("");
+        panel.setLayout(null);
+        
+        DirectoryLoader dirBtn = new DirectoryLoader(this);        
+        dirBtn.setBounds(0,0,80,30);
+        panel.add(dirBtn);
+        
+        songList = new DraggablePanel();
         songList.setText(play_list.get_list_str());
         songList.setBounds(100, 0, 900, 350);
         panel.add(songList);
@@ -35,21 +44,17 @@ public class GUI{
         JButton prevBtn = new JButton("<<|");
         prevBtn.setBounds(200, 450, 100, 100);
         panel.add(prevBtn);
-
-        JButton playBtn = new JButton("▶");
+        
+        JToggleButton playBtn = new JToggleButton("▶");
         playBtn.setBounds(300, 450, 100, 100);
         panel.add(playBtn);
 
-        JButton pauseBtn = new JButton("||");
-        pauseBtn.setBounds(400, 450, 100, 100);
-        panel.add(pauseBtn);
-        
         JButton stopBtn = new JButton("█");
-        stopBtn.setBounds(500, 450, 100, 100);
+        stopBtn.setBounds(400, 450, 100, 100);
         panel.add(stopBtn);
 
         JButton nextBtn = new JButton("|>>");
-        nextBtn.setBounds(600, 450, 100, 100);
+        nextBtn.setBounds(500, 450, 100, 100);
         panel.add(nextBtn);
         
         JToggleButton ranBtr = new JToggleButton("random:off");
@@ -60,20 +65,26 @@ public class GUI{
         pBar.bar.body_panel.setBounds(100,600,800,15);
         // Button action
         playBtn.addActionListener(actionEvent -> {
-        	playing.start_play();
+        	if (playBtn.isSelected()) {
+        		playBtn.setText("||");
+                playing.start_play();
+            } else {
+            	playBtn.setText("▶");
+                playing.pause_play();
+            }
+        	
         });
 
-        pauseBtn.addActionListener(actionEvent -> {
-        	playing.pause_play();
-        });
         stopBtn.addActionListener(actionEvent -> {
         	playing.stop_play();
+        	playBtn.setSelected(false);
         });
         prevBtn.addActionListener(actionEvent -> {
         	playing.stop_play();
         	playing = play_list.Previous_song();
         	playing.start_play();
         	songList.setText(play_list.get_list_str());
+        	playBtn.setSelected(false);
         });
 
         nextBtn.addActionListener(actionEvent -> {
@@ -81,8 +92,9 @@ public class GUI{
         	playing = play_list.Next_song();
         	playing.start_play();
         	songList.setText(play_list.get_list_str());
+        	playBtn.setSelected(false);
         });
-        ranBtr.addActionListener(e -> {
+        ranBtr.addActionListener(actionEvent -> {
             if (ranBtr.isSelected()) {
                 ranBtr.setText("random:on");
                 play_list.random = true;
@@ -91,6 +103,8 @@ public class GUI{
                 play_list.random = false;
             }
         });
+
+        
         
         frame.setVisible(true);
     }
