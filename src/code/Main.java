@@ -2,6 +2,11 @@ package code;
 
 public class Main {
     public static void main(String[] args) {
-        new GUI();
+    	GUI gui = new GUI();
+        
+        while (true) {
+			
+			
+		}
     }
 }
