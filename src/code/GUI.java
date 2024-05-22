@@ -51,7 +51,11 @@ public class GUI{
         JButton nextBtn = new JButton("|>>");
         nextBtn.setBounds(600, 450, 100, 100);
         panel.add(nextBtn);
-
+        
+        JToggleButton ranBtr = new JToggleButton("random:off");
+        ranBtr.setBounds(700, 450, 100, 100);
+        panel.add(ranBtr);
+        
         panel.add(pBar.bar.body_panel);
         pBar.bar.body_panel.setBounds(100,600,800,15);
         // Button action
@@ -78,11 +82,22 @@ public class GUI{
         	playing.start_play();
         	songList.setText(play_list.get_list_str());
         });
+        ranBtr.addActionListener(e -> {
+            if (ranBtr.isSelected()) {
+                ranBtr.setText("random:on");
+                play_list.random = true;
+            } else {
+                ranBtr.setText("random:off");
+                play_list.random = false;
+            }
+        });
+        
         frame.setVisible(true);
     }
     
     public void update(){
     	pBar.update(playing);
+
     }
 
 }
