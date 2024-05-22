@@ -5,8 +5,7 @@ public class Main {
     	GUI gui = new GUI();
         
         while (true) {
-			
-			
+			gui.update();			
 		}
     }
 }

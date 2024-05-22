@@ -8,7 +8,8 @@ import java.util.ArrayList;
 public class GUI{
 
     public Music playing;
-    PlayList play_list ;
+    PlayList play_list;
+    ProgressBar pBar = new ProgressBar();
     public GUI() {
         // Initialize Playlist
         Read_PlayList reader = new Read_PlayList();
@@ -51,6 +52,8 @@ public class GUI{
         nextBtn.setBounds(600, 450, 100, 100);
         panel.add(nextBtn);
 
+        panel.add(pBar.bar.body_panel);
+        pBar.bar.body_panel.setBounds(100,600,800,15);
         // Button action
         playBtn.addActionListener(actionEvent -> {
         	playing.start_play();
@@ -79,7 +82,7 @@ public class GUI{
     }
     
     public void update(){
-    	
+    	pBar.update(playing);
     }
 
 }
