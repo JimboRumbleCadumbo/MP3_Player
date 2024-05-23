@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * displays the progress bar of the song
  */
 
-public class Bar {
+public class Bar_calc {
     JPanel body_panel = new JPanel();
     public JLabel bar = new JLabel();
     public JLabel outline = new JLabel();
@@ -27,7 +27,7 @@ public class Bar {
      * @param size setting up the bar panel size
      */
 
-    public Bar(int size) {
+    public Bar_calc(int size) {
         body_panel.setBounds(50, 50, size, size);
         outline.setBounds(0, 0, size, 15);
         bar.setBounds(0, 0, size, 15);

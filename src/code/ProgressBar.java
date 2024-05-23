@@ -5,7 +5,7 @@ package code;
  */
 
 public class ProgressBar {
-    public Bar bar = new Bar(800);
+    public Bar_calc bar = new Bar_calc(800);
 
     /**
      * Updates the progress bar every frame

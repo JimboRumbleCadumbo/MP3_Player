@@ -2,10 +2,7 @@ package code;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
-import javax.sound.sampled.*;
-import java.io.IOException;
 
 /**
  * Initialize the application window using JSwing GUI
@@ -14,8 +11,8 @@ import java.io.IOException;
 public class GUI {
 
     public Music playing;
-    PlayList play_list;
-    Read_PlayList reader = new Read_PlayList();
+    PlayList usrList;
+    Read_Playlist reader = new Read_Playlist();
     ProgressBar pBar = new ProgressBar();
     DraggablePanel songList;
     JFrame frame;
@@ -23,8 +20,8 @@ public class GUI {
     public GUI() {
         // Initialize Playlist
         ArrayList<Music> usrPlaylist = reader.readMusic();
-        play_list = new PlayList(usrPlaylist);
-        playing = play_list.Previous_song();
+        usrList = new PlayList(usrPlaylist);
+        playing = usrList.Previous_song();
 
         // Initialize GUI interface
         frame = new JFrame();
@@ -42,7 +39,7 @@ public class GUI {
 
         // Draggable playlist
         songList = new DraggablePanel();
-        songList.setText(play_list.get_list_str());
+        songList.setText(usrList.get_list_str());
         songList.setBounds(100, 50, 900, 350);
         panel.add(songList);
 
@@ -92,27 +89,27 @@ public class GUI {
         // Previous Song Button action
         prevBtn.addActionListener(actionEvent -> {
             playing.stop_play();
-            playing = play_list.Previous_song();
+            playing = usrList.Previous_song();
             playing.start_play();
-            songList.setText(play_list.get_list_str());
+            songList.setText(usrList.get_list_str());
         });
 
         // Next Song Button action
         nextBtn.addActionListener(actionEvent -> {
             playing.stop_play();
-            playing = play_list.Next_song();
+            playing = usrList.Next_song();
             playing.start_play();
-            songList.setText(play_list.get_list_str());
+            songList.setText(usrList.get_list_str());
         });
 
         // Random Button action
         ranBtr.addActionListener(actionEvent -> {
             if (ranBtr.isSelected()) {
                 ranBtr.setText("random:on");
-                play_list.random = true;
+                usrList.random = true;
             } else {
                 ranBtr.setText("random:off");
-                play_list.random = false;
+                usrList.random = false;
             }
         });
 

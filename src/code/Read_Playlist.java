@@ -9,7 +9,7 @@ import javax.sound.sampled.*;
  * Reads the song folder and returns an Arraylist of Music Class objects.
  */
 
-public class Read_PlayList {
+public class Read_Playlist {
 
     public ArrayList<Music> readMusic() {
         return readMusic(Objects.requireNonNull(getClass().getClassLoader().getResource("audio")).getPath());
